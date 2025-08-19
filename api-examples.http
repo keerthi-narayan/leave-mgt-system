@@ -1,0 +1,46 @@
+// Add employee
+POST http://127.0.0.1:8000/employees
+Content-Type: application/json
+
+{
+  "name": "Asha Rao",
+  "email": "asha.rao@example.com",
+  "department": "Engineering",
+  "joining_date": "2025-01-10",
+  "leave_balance": 20
+}
+
+###
+// Apply leave (valid)
+POST http://127.0.0.1:8000/leaves
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "start_date": "2025-02-03",
+  "end_date": "2025-02-05",
+  "reason": "Family function"
+}
+
+###
+// Approve
+POST http://127.0.0.1:8000/leaves/1/approve
+
+###
+// Get balance
+GET http://127.0.0.1:8000/employees/1/leave-balance
+
+###
+// List leaves
+GET http://127.0.0.1:8000/employees/1/leaves
+
+###
+// Edge case: overlap
+POST http://127.0.0.1:8000/leaves
+Content-Type: application/json
+
+{
+  "employee_id": 1,
+  "start_date": "2025-02-04",
+  "end_date": "2025-02-06"
+}
